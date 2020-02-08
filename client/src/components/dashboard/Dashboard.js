@@ -6,28 +6,32 @@ const Dashboard = props => {
   const user = context.user;
 
   useEffect(() => {
-    if (!context.user && !context.currentUser) {
-      props.history.push("/login");
-    }
+    context.checkIfLoggedIn().then(auth => {
+      if (!auth) {
+        props.history.push("/login");
+      } else {
+        context.getUser();
+      }
+    });
   }, [user]);
 
   return (
     <React.Fragment>
-      <span>Dashboard page</span>
       {user ? (
         <React.Fragment>
+          <span>Dashboard page</span>
           <span>{user.name}</span>
           <span>{user.email}</span>
+          <button
+            onClick={() => {
+              context.signout();
+              props.history.push("/");
+            }}
+          >
+            Sign out
+          </button>
         </React.Fragment>
       ) : null}
-      <button
-        onClick={() => {
-          context.signout();
-          props.history.push("/");
-        }}
-      >
-        Sign out
-      </button>
     </React.Fragment>
   );
 };

@@ -75,6 +75,7 @@ const GlobalStates = props => {
             .then(res => {
               let data = res.data();
               setUser(data);
+              console.log(data);
               resolve(true);
             });
         });
@@ -87,6 +88,25 @@ const GlobalStates = props => {
     });
   };
 
+  const checkIfLoggedIn = () => {
+    return new Promise(resolve => {
+      auth.onAuthStateChanged(resolve);
+    });
+  };
+
+  const getUser = () => {
+    if (auth.currentUser.uid) {
+      const uid = auth.currentUser.uid;
+      db.collection("doctors")
+        .doc(uid)
+        .get()
+        .then(res => {
+          let data = res.data();
+          setUser(data);
+        });
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -96,7 +116,9 @@ const GlobalStates = props => {
         login: login,
         user: user,
         currentUser: auth.currentUser,
-        signout: signout
+        signout: signout,
+        checkIfLoggedIn: checkIfLoggedIn,
+        getUser: getUser
       }}
     >
       {props.children}
