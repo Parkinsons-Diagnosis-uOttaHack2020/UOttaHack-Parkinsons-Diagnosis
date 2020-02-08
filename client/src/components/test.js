@@ -16,7 +16,7 @@ const Test = props => {
       >
         Envoyer
       </button>
-      <span>{arr.length != 0 ? arr.img.length : "0"}</span>
+      <span>{arr.length != 0 ? arr.length : "0"}</span>
     </React.Fragment>
   );
 };

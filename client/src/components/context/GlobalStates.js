@@ -20,7 +20,7 @@ const GlobalStates = props => {
     let res = await fetch("http://localhost:8000/send-image", options);
     const array = await res.json();
     console.log(array);
-    setArr(array);
+    setArr(array.img);
   };
 
   return (

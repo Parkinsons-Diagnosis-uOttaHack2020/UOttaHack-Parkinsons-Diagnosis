@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
-app.get("/send-image", async (req, res) => {
+app.post("/send-image", async (req, res) => {
   const data = req.body;
   const options = {
     method: "POST",
@@ -31,11 +31,11 @@ app.get("/send-image", async (req, res) => {
     }
     const parsedName = await name.json();
     fetched = parsedName;
-    console.log(parsedName);
   } catch (error) {
     console.log(error);
   }
-  res.send(fetched);
+  console.log(fetched);
+  res.json(fetched);
 });
 
 app.listen(port, () => console.log(`Api starting on port ${port}!`));
