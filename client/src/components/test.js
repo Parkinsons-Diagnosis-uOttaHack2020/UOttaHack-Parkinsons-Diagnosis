@@ -5,13 +5,13 @@ import TEMP from "./TEMP.json";
 const Test = props => {
   const context = useContext(Context);
   const arr = context.arr;
-  let arrToSend = TEMP.img;
+  let objToSend = TEMP;
 
   return (
     <React.Fragment>
       <button
         onClick={() => {
-          context.sendImage(arrToSend);
+          context.sendImage(objToSend);
         }}
       >
         Envoyer

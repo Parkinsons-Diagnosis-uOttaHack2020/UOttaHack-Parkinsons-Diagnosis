@@ -5,11 +5,9 @@ import Context from "./Context";
 const GlobalStates = props => {
   const [arr, setArr] = useState([]);
 
-  const sendImage = async arr => {
-    let obj = {
-        img: arr
-    }
+  const sendImage = async obj => {
     // post request
+    console.log(JSON.stringify(obj));
     const options = {
       method: "POST",
       body: JSON.stringify(obj),
@@ -18,9 +16,8 @@ const GlobalStates = props => {
       }
     };
     let res = await fetch("http://localhost:8000/send-image", options);
-    const array = await res.json();
-    console.log(array);
-    setArr(array.img);
+    console.log(res);
+    //setArr(array.img);
   };
 
   return (
