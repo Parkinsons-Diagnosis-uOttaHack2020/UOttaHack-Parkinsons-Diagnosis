@@ -13,7 +13,7 @@ const Login = props => {
     context.login(email, pass).then(success => {
       if (success) {
         console.log(success);
-        props.history.push("/");
+        props.history.push("/user/dashboard");
         form.reset();
       } else {
         console.log(success);
@@ -28,6 +28,10 @@ const Login = props => {
       e.preventDefault();
       login();
     });
+
+    if (context.user) {
+      props.history.push("/user/dashboard");
+    }
   }, []);
 
   return (

@@ -81,13 +81,22 @@ const GlobalStates = props => {
     });
   };
 
+  const signout = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    });
+  };
+
   return (
     <Context.Provider
       value={{
         arr: arr,
         sendImage: sendImage,
         register: register,
-        login: login
+        login: login,
+        user: user,
+        currentUser: auth.currentUser,
+        signout: signout
       }}
     >
       {props.children}
