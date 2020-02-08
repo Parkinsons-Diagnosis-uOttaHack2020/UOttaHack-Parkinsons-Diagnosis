@@ -7,7 +7,7 @@ const Test = props => {
   const context = useContext(Context);
   const [ctx, setCtx] = useState(null);
 
-  const arr = context.arr;
+  const state = context.state;
   let objToSend = TEMP;
 
   var mousePressed = false;
@@ -61,7 +61,7 @@ const Test = props => {
 
     var result = [];
     for(let i = 0; i < pix.length; i += 4) {
-      let element = pix[i];
+      let element = pix[i+3];
       result.push(element);
     }
     return result;
@@ -98,7 +98,7 @@ const Test = props => {
       >
         Envoyer
       </button>
-      <span>{arr.length != 0 ? arr.length : "0"}</span>
+      <span>{state !== null ? `${state}` : "Nothing"}</span>
     </React.Fragment>
   );
 };

@@ -3,7 +3,7 @@ import Context from "./Context";
 //import * as firebase from "firebase";
 
 const GlobalStates = props => {
-  const [arr, setArr] = useState([]);
+  const [state, setState] = useState(null);
 
   const sendImage = async (arr, width, height)  => {
     let obj = {
@@ -21,13 +21,13 @@ const GlobalStates = props => {
     };
     const response = await fetch("http://localhost:8000/send-image", options);
     let resObject = await response.json();
-    setArr(resObject.img);
+    setState(resObject.result);
   };
 
   return (
     <Context.Provider
       value={{
-        arr: arr,
+        state: state,
         sendImage: sendImage
       }}
     >
