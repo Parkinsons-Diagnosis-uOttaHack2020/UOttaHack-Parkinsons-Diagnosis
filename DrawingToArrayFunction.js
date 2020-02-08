@@ -1,3 +1,4 @@
+
 //using p5js 
 
 function setup() {
@@ -37,6 +38,6 @@ function draw() {
     console.log(p.pixels); 
 
   } 
-  text("X: "+mouseX, 0, height/4);
-  text("Y: "+mouseY, 0, height/2);
+  //text("X: "+mouseX, 0, height/4);
+  //text("Y: "+mouseY, 0, height/2);
 }
