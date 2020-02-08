@@ -41,11 +41,28 @@ const GlobalStates = props => {
     setArr(resObject.img);
   };
 
+  const register = (name, email, pass) => {
+    auth.createUserWithEmailAndPassword(email, pass).then(cred => {
+      auth.currentUser.updateProfile({ displayName: name }).then(() => {
+        let userObj = {
+          name: name,
+          email: email,
+          uid: auth.currentUser.uid,
+          patients: []
+        }
+        db.collection("doctors")
+        .doc(auth.currentUser.uid)
+        .set(userObj);
+      })
+    })
+  };
+
   return (
     <Context.Provider
       value={{
         arr: arr,
-        sendImage: sendImage
+        sendImage: sendImage,
+        register: register
       }}
     >
       {props.children}
