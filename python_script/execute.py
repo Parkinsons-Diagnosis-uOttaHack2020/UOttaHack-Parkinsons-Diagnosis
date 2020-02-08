@@ -9,8 +9,6 @@ import os
 from sklearn.preprocessing import LabelEncoder
 
 
-from joblib import dump, load
-
 def quantify_image(image):
 	# compute the histogram of oriented gradients feature vector for
 	# the input image
@@ -44,7 +42,10 @@ def load_split(path):
 		image = cv2.threshold(image, 0, 255,
 			cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
 
-		# quantify the image
+		cv2.imshow("im", image)
+		cv2.waitKey(0)
+
+		# quantify the images
 		features = quantify_image(image)
 
 		# update the data and labels lists, respectively

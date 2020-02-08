@@ -3,6 +3,11 @@ import json
 import time
 
 from analyze.analyze import analyze
+
+from joblib import load
+
+
+
 app = Flask(__name__)
  
 @app.route('/')
@@ -17,6 +22,7 @@ def postdata():
     result_str = 'true' if result else 'false'
 
     json_result = '{ "result": ' + result_str + ' }'
+    
     # do something with this data variable that contains the data from the node server
     return json.dumps(json.loads(json_result))
  
