@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import User from "./components/signIn/User";
-import SignIn from "./components/signIn/SignIn";
+import Test from "./components/test";
 
 const RouterComponent = () => {
   return (
@@ -9,9 +8,9 @@ const RouterComponent = () => {
       <Router>
         <Switch>
           <Route
-            path="/test"
+            path="/"
             exact
-            render={props => <SignIn {...props} redirect={null}/>}
+            render={props => <Test {...props}/>}
           />
           <Route
             path="/"

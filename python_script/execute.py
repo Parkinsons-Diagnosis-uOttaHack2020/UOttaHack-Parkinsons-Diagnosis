@@ -106,10 +106,22 @@ for i in idxs:
 
 	# draw the colored class label on the output image and add it to
 	# the set of output images
+	if ("HE" in testingPaths[i].split("/")[-1]):
+		excepted_col = (0, 255, 0)
+		excepted = "healthy"
+	else:
+		excepted_col = (0, 0, 255)
+		excepted = "parkinson"
+
 	color = (0, 255, 0) if label == "healthy" else (0, 0, 255)
 	cv2.putText(output, label, (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
 		color, 2)
+
+	cv2.putText(output, excepted, (3, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+		excepted_col, 2)
 	images.append(output)
+	# cv2.imshow("{}".format(testingPaths[i]), output)
+	# cv2.waitKey(0)
 
 # create a montage using 128x128 "tiles" with 5 rows and 5 columns
 montage = build_montages(images, (128, 128), (5, 5))[0]
