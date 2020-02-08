@@ -7,7 +7,6 @@ const GlobalStates = props => {
 
   const sendImage = async obj => {
     // post request
-    console.log(JSON.stringify(obj));
     const options = {
       method: "POST",
       body: JSON.stringify(obj),
@@ -15,9 +14,9 @@ const GlobalStates = props => {
         "Content-Type": "application/json"
       }
     };
-    let res = await fetch("http://localhost:8000/send-image", options);
-    console.log(res);
-    //setArr(array.img);
+    const response = await fetch("http://localhost:8000/send-image", options);
+    let resObject = await response.json();
+    setArr(resObject.img);
   };
 
   return (
