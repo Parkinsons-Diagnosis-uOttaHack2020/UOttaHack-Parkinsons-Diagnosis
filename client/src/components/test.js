@@ -15,7 +15,7 @@ const Test = props => {
   function start() {
       ctx = document.getElementById('myCanvas').getContext("2d");
   
-      $('#myCanvas').mouseover(function (e) {
+      $('#myCanvas').mousedown(function (e) {
           mousePressed = true;
           Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
       });
