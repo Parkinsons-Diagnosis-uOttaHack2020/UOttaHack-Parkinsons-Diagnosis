@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 
 const GlobalStates = props => {
   const [arr, setArr] = useState([]);
+  const [user, setUser] = useState(null);
 
   // firebase config
   const firebaseConfig = {
@@ -42,19 +43,42 @@ const GlobalStates = props => {
   };
 
   const register = (name, email, pass) => {
-    auth.createUserWithEmailAndPassword(email, pass).then(cred => {
+    auth.createUserWithEmailAndPassword(email, pass).then(cred => {
       auth.currentUser.updateProfile({ displayName: name }).then(() => {
         let userObj = {
           name: name,
           email: email,
           uid: auth.currentUser.uid,
           patients: []
-        }
+        };
+        setUser(userObj);
         db.collection("doctors")
-        .doc(auth.currentUser.uid)
-        .set(userObj);
-      })
-    })
+          .doc(auth.currentUser.uid)
+          .set(userObj);
+      });
+    });
+  };
+
+  const login = (email, pass) => {
+    return new Promise((resolve, reject) => {
+      auth
+        .signInWithEmailAndPassword(email, pass)
+        .catch(err => {
+          alert(err);
+          reject(false);
+        })
+        .then(() => {
+          const uid = auth.currentUser.uid;
+          db.collection("doctors")
+            .doc(uid)
+            .get()
+            .then(res => {
+              let data = res.data();
+              setUser(data);
+              resolve(true);
+            });
+        });
+    });
   };
 
   return (
@@ -62,7 +86,8 @@ const GlobalStates = props => {
       value={{
         arr: arr,
         sendImage: sendImage,
-        register: register
+        register: register,
+        login: login
       }}
     >
       {props.children}
