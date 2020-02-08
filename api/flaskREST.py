@@ -1,5 +1,6 @@
 from flask import Flask, request
 import json
+import time
  
 app = Flask(__name__)
  
@@ -10,7 +11,8 @@ def index():
 @app.route('/postdata', methods = ['POST'])
 def postdata():
     data = request.get_json()
-    print(data)
+    print(len(data["img"]))
+
     # do something with this data variable that contains the data from the node server
     return json.dumps(data)
  

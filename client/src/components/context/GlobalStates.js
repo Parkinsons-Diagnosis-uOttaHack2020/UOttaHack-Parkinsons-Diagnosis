@@ -5,7 +5,12 @@ import Context from "./Context";
 const GlobalStates = props => {
   const [arr, setArr] = useState([]);
 
-  const sendImage = async obj => {
+  const sendImage = async (arr, width, height)  => {
+    let obj = {
+      img: arr,
+      w: width,
+      h: height
+    }
     // post request
     const options = {
       method: "POST",

@@ -5,17 +5,16 @@ import $ from "jquery";
 
 const Test = props => {
   const context = useContext(Context);
+  const [ctx, setCtx] = useState(null);
+
   const arr = context.arr;
   let objToSend = TEMP;
 
   var mousePressed = false;
   var lastX, lastY;
-  var ctx;
   
   function start() {
-      ctx = document.getElementById('myCanvas').getContext("2d");
-  
-      $('#myCanvas').mouseover(function (e) {
+      $('#myCanvas').mousedown(function (e) {
           mousePressed = true;
           Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
       });
@@ -54,16 +53,47 @@ const Test = props => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
+  function getPixels() {
+    // Get the CanvasPixelArray from the given coordinates and dimensions.
+    var imgd = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    var pix = imgd.data;
+    console.log(pix);
+
+    var result = [];
+    for(let i = 0; i < pix.length; i += 4) {
+      let element = pix[i];
+      result.push(element);
+    }
+    return result;
+    // // Loop over each pixel and invert the color.
+    // for (var i = 0, n = pix.length; i < n; i += 4) {
+    //     pix[i  ] = 255 - pix[i  ]; // red
+    //     pix[i+1] = 255 - pix[i+1]; // green
+    //     pix[i+2] = 255 - pix[i+2]; // blue
+    //     // i+3 is alpha (the fourth element)
+    // }
+
+  }
+
   useEffect(() => {
-    start();
-  }, []);
+    if (ctx) {
+      start();      
+    } else {
+      setCtx(document.getElementById('myCanvas').getContext("2d"));
+    }
+
+  }, [ctx]);
 
   return (
     <React.Fragment>
-      <canvas id="myCanvas"></canvas>
+      <canvas id="myCanvas" width="250" height="250"></canvas>
       <button
         onClick={() => {
-          context.sendImage(objToSend);
+          //context.sendImage(objToSend);
+          
+          context.sendImage(getPixels(), ctx.canvas.width, ctx.canvas.height);
+          clearArea();
+
         }}
       >
         Envoyer
