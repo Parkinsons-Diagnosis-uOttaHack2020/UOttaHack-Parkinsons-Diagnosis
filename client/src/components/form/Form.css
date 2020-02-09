@@ -1,5 +1,65 @@
 .canvasWrapper {
-	border: 5px solid red;
+	border: 2px solid #dfdfdf;
 	width: max-content;
-	height: max-content;
+    height: max-content;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.draw {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row; 
+    align-items: flex-start; 
+    height: calc(100% - 60px);
+    width: 100%;
+}
+
+.form-btns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.form-btns {
+    width: calc(50% - 12.5px);
+}
+
+.instructions {
+    height: auto !important;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.inst-txt {
+    display: inline-block;
+    width: 550px !important;
+    color: var(--black);
+    margin-top: 12.5px;
+    font-size: 17px;
+    margin-right: 25px;
+}
+
+.top h1 {
+    color: var(--black);
+    padding: 0 0 12.5px 0;
+    border-bottom: 1px solid #dfdfdf;
+    margin-right: 25px;
+}
+
+.instructions img {
+    width: auto;
+    object-fit: cover;
+    max-height: 300px;
+    margin-top: 25px;
 }

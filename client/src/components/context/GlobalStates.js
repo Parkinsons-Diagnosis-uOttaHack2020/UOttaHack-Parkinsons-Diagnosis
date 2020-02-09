@@ -9,14 +9,14 @@ const GlobalStates = props => {
 
   // firebase config
   const firebaseConfig = {
-    apiKey: "AIzaSyCS58v_4_faERm1BMNWbS5JyPaOUWid_lQ",
-    authDomain: "uottahack2020-parkinsons-api.firebaseapp.com",
-    databaseURL: "https://uottahack2020-parkinsons-api.firebaseio.com",
-    projectId: "uottahack2020-parkinsons-api",
-    storageBucket: "uottahack2020-parkinsons-api.appspot.com",
-    messagingSenderId: "109481509112",
-    appId: "1:109481509112:web:c3adeb13cc0db09b04fb0d",
-    measurementId: "G-N7543BNP8X"
+    apiKey: "AIzaSyBvUDf4F3M0Th84gw1gCUamNBjSKhzgAA0",
+    authDomain: "pm-d-4bc87.firebaseapp.com",
+    databaseURL: "https://pm-d-4bc87.firebaseio.com",
+    projectId: "pm-d-4bc87",
+    storageBucket: "pm-d-4bc87.appspot.com",
+    messagingSenderId: "458449225121",
+    appId: "1:458449225121:web:df2f1835daf976bfa7f7e0",
+    measurementId: "G-503RQGPDL3"
   };
 
   // Initialize Firebase
@@ -101,7 +101,7 @@ const GlobalStates = props => {
 
   const getUser = () => {
     if (auth.currentUser) {
-      const uid = auth.currentUser.uid;
+    const uid = auth.currentUser.uid;
       db.collection("doctors")
         .doc(uid)
         .get()

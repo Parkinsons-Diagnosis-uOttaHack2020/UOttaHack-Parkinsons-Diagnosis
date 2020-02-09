@@ -7,13 +7,16 @@ const Dashboard = props => {
   const context = useContext(Context);
   const user = context.user;
   const [newPatient, setNewPatient] = useState(false);
+  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
     context.checkIfLoggedIn().then(auth => {
       if (!auth) {
         props.history.push("/login");
-      } else {
+      } else if (!user) {
         context.getUser();
+      } else {
+        setAuth(true);
       }
     });
   }, [user]);
@@ -23,14 +26,13 @@ const Dashboard = props => {
       {newPatient ? (
         <NewPatient closePopup={() => setNewPatient(false)} />
       ) : null}
-      {user ? (
+      {auth ? (
         <section className="d">
           <div className="dashboard">
             <div className="d-left">
               <div className="user">
-                <span>{user.name}</span>
-                <span>{user.email}</span>
-               
+                <i className="fas fa-user-md user-icon"></i>
+                <span>Hi, {user.name}</span>
               </div>
               <button
                 onClick={() => {
@@ -45,6 +47,7 @@ const Dashboard = props => {
             <div className="d-right">
               <div className="patients-container">
                 <div className="patients-top">
+                  <span>Patients</span>
                   <button
                     className="btn"
                     onClick={() => {
@@ -66,14 +69,16 @@ const Dashboard = props => {
                       {user.patients.map(patient => {
                         return (
                           <div key={patient.uid} className="patient">
-                            <span>Patient: {patient.name}</span>
+                            <span>Name: {patient.name}</span>
                             <span>
                               Test status:
                               {patient.result !== null
                                 ? ` ${patient.result}`
                                 : " not completed"}
                             </span>
-                            <a href={patient.url} target="_blank">{patient.url}</a>
+                            <a href={patient.url} target="_blank">
+                              {patient.url}
+                            </a>
                           </div>
                         );
                       })}
@@ -84,7 +89,9 @@ const Dashboard = props => {
             </div>
           </div>
         </section>
-      ) : null}
+      ) : (
+        <span>test</span>
+      )}
     </React.Fragment>
   );
 };

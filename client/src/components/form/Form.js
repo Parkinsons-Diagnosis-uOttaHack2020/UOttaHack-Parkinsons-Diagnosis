@@ -134,28 +134,48 @@ const Form = props => {
       {valid ? (
         <React.Fragment>
           <div className="form-container">
-            <div className="canvasWrapper">
-              <canvas id="myCanvas" width="500" height="500"></canvas>
+            <div className="instructions">
+              <div className="top">
+                <h1>Instructions</h1>
+                <span className="inst-txt">
+                  In the blank canvas on the right, try your best to draw a
+                  spiral like the example pictured below. Click{" "}
+                  <b>SUBMIT</b> once your are done, or <b>CLEAR</b> to try
+                  again.
+                </span>
+              </div>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Archimedean_spiral.svg/1200px-Archimedean_spiral.svg.png" />
             </div>
-            <button
-              onClick={() => {
-                context.sendImage(
-                  getPixels(),
-                  ctx.canvas.width,
-                  ctx.canvas.height
-                );
-                clearArea();
-              }}
-            >
-              Envoyer
-            </button>
-            <button
-              onClick={() => {
-                clearArea();
-              }}
-            >
-              Clear
-            </button>
+            <div className="draw">
+              <div>
+                <div className="canvasWrapper">
+                  <canvas id="myCanvas" width="400" height="400"></canvas>
+                </div>
+                <div className="form-btns-container">
+                  <button
+                    className="btn form-btns"
+                    onClick={() => {
+                      context.sendImage(
+                        getPixels(),
+                        ctx.canvas.width,
+                        ctx.canvas.height
+                      );
+                      clearArea();
+                    }}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="btn form-btns"
+                    onClick={() => {
+                      clearArea();
+                    }}
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </React.Fragment>
       ) : null}
