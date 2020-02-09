@@ -59,7 +59,7 @@ const Test = props => {
     // Get the CanvasPixelArray from the given coordinates and dimensions.
     var imgd = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
     var pix = imgd.data;
-    console.log(pix);
+    // console.log(pix);
 
     var result = [];
     var max = 0;
@@ -68,7 +68,7 @@ const Test = props => {
       if (pix[i+3] == 255) {max++;}
       result.push(element);
     }
-    console.log(max);
+    // console.log(max);
     return result;
     // // Loop over each pixel and invert the color.
     // for (var i = 0, n = pix.length; i < n; i += 4) {
