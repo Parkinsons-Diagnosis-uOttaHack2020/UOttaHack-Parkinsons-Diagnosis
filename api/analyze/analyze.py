@@ -18,7 +18,7 @@ sess = tf.Session(config=config)
 
 set_session(sess)
 
-model = load_model('./analyze/88-epochs.model')
+model = load_model('./analyze/23-epochs.model')
 
 
 

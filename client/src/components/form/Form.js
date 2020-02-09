@@ -7,7 +7,6 @@ const Form = props => {
   const context = useContext(Context);
   const [valid, setValid] = useState(null);
   const [ids, setIds] = useState(null);
-  const sent = context.sent;
 
   const parseUrl = async () => {
     const url = window.location.href;
@@ -103,6 +102,7 @@ const Form = props => {
 
   function getPixels() {
     // Get the CanvasPixelArray from the given coordinates and dimensions.
+    ctx = document.getElementById("myCanvas").getContext("2d");
     var imgd = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
     var pix = imgd.data;
     console.log(pix);
@@ -137,7 +137,6 @@ const Form = props => {
 
   return (
     <section>
-      {!sent ? (
         <React.Fragment>
           {valid ? (
             <React.Fragment>
@@ -189,9 +188,6 @@ const Form = props => {
             </React.Fragment>
           ) : null}
         </React.Fragment>
-      ) : (
-        <span>The result has been sent</span>
-      )}
     </section>
   );
 };
