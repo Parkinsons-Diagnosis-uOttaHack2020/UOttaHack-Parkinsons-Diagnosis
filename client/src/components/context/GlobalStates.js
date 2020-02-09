@@ -29,11 +29,12 @@ const GlobalStates = props => {
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const sendImage = async (arr, width, height) => {
+  const sendImage = async (arr, width, height, ids) => {
     let obj = {
       img: arr,
       w: width,
-      h: height
+      h: height,
+      ids: ids
     };
     // post request
     const options = {

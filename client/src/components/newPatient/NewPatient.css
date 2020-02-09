@@ -5,15 +5,15 @@
   transform: translate(-50%, -50%);
   background-color: #fff;
   display: flex;
-  z-index: 999;
+  z-index: 1001;
   flex-direction: column;
+  border-radius: 5px;
   padding: 25px;
-
 }
 
 .overlay {
   position: fixed;
-  z-index: 900;
+  z-index: 1000;
   background-color: black;
   opacity: 0.35;
   width: 100vw;
@@ -21,36 +21,35 @@
 }
 
 .input {
-    outline: none;
-    border: none;
-    color : var(--black);
-    background-color: var(--gray);
-    padding: 12.5px 12.5px;
-    font-size: 16px;
-    font-weight: 500;
-    min-width: 350px;
-    margin: 12.5px 0;
+  outline: none;
+  border: none;
+  color: var(--black);
+  background-color: var(--gray);
+  padding: 12.5px 12.5px;
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 350px;
+  margin: 12.5px 0;
 }
 
 #new-patient {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
 .form-btn {
-    margin-top: 37.5px;
-    width: 100%
+  margin-top: 37.5px;
+  width: 100%;
 }
 
 .popup-top {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12.5px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12.5px;
 }
 
 .close-popup {
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
 }
