@@ -1,5 +1,5 @@
-#defaultCanvas0 {
-    height: 244px;
-    width: 244px;
-    border: 2px solid red;
+.canvasWrapper {
+	border: 5px solid red;
+	width: max-content;
+	height: max-content;
 }

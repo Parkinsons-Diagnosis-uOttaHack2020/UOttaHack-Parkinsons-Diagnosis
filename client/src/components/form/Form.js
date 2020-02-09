@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Context";
 import "./Form.css";
+import $ from "jquery";
 
 const Form = props => {
   const context = useContext(Context);
@@ -32,6 +33,13 @@ const Form = props => {
         start();
       }
     });
+  };
+
+  let ctx;
+  let mousePressed = false;
+  let lastX, lastY;
+  let objToSend = {
+    img: "test"
   };
 
   function start() {

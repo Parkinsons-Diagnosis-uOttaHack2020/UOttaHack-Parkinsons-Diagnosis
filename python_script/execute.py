@@ -9,8 +9,7 @@ import os
 from sklearn.preprocessing import LabelEncoder
 
 
-from joblib import dump, load
-
+from joblib import load
 def quantify_image(image):
 	# compute the histogram of oriented gradients feature vector for
 	# the input image
@@ -44,7 +43,12 @@ def load_split(path):
 		image = cv2.threshold(image, 0, 255,
 			cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
 
-		# quantify the image
+		cv2.imshow("im", image)
+		cv2.waitKey(0)
+
+		# print(np.max(image))
+		# print(np.min(image))
+		# quantify the images
 		features = quantify_image(image)
 
 		# update the data and labels lists, respectively
@@ -102,6 +106,7 @@ for i in idxs:
 	# features using the last trained Random Forest
 	features = quantify_image(image)
 	preds = model.predict([features])
+	print(preds)
 	label = le.inverse_transform(preds)[0]
 
 	# draw the colored class label on the output image and add it to

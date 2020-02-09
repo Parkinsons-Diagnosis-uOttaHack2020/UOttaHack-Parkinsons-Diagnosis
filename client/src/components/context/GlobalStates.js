@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 const uuidv4 = require("uuid/v4");
 
 const GlobalStates = props => {
+<<<<<<< HEAD
   const [arr, setArr] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -28,8 +29,16 @@ const GlobalStates = props => {
   // make auth and firestore references
   const auth = firebase.auth();
   const db = firebase.firestore();
+=======
+  const [state, setState] = useState(null);
+>>>>>>> ec8ff9ce700775ce2066180a35125e9266032190
 
-  const sendImage = async obj => {
+  const sendImage = async (arr, width, height)  => {
+    let obj = {
+      img: arr,
+      w: width,
+      h: height
+    }
     // post request
     const options = {
       method: "POST",
@@ -40,7 +49,7 @@ const GlobalStates = props => {
     };
     const response = await fetch("http://localhost:8000/send-image", options);
     let resObject = await response.json();
-    setArr(resObject.img);
+    setState(resObject.result);
   };
 
   const register = (name, email, pass) => {
@@ -188,6 +197,7 @@ const GlobalStates = props => {
   return (
     <Context.Provider
       value={{
+<<<<<<< HEAD
         arr: arr,
         sendImage: sendImage,
         register: register,
@@ -200,6 +210,10 @@ const GlobalStates = props => {
         createPatient: createPatient,
         patientSubmit: patientSubmit,
         getValid: getValid
+=======
+        state: state,
+        sendImage: sendImage
+>>>>>>> ec8ff9ce700775ce2066180a35125e9266032190
       }}
     >
       {props.children}
