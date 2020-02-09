@@ -3,8 +3,28 @@ const bodyParser = require("body-parser");
 const fetch = require("cross-fetch");
 const cors = require("cors");
 
+const firebase = require("firebase");
+
 const app = express();
 const port = 8000;
+const firebaseConfig = {
+  apiKey: "AIzaSyBvUDf4F3M0Th84gw1gCUamNBjSKhzgAA0",
+  authDomain: "pm-d-4bc87.firebaseapp.com",
+  databaseURL: "https://pm-d-4bc87.firebaseio.com",
+  projectId: "pm-d-4bc87",
+  storageBucket: "pm-d-4bc87.appspot.com",
+  messagingSenderId: "458449225121",
+  appId: "1:458449225121:web:df2f1835daf976bfa7f7e0",
+  measurementId: "G-503RQGPDL3"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+  // make auth and firestore references
+const db = firebase.firestore();
 
 app.use(cors());
 
