@@ -145,6 +145,26 @@ const GlobalStates = props => {
     });
   };
 
+  const patientSubmit = age => {
+    if (auth.currentUser.uid) {
+      const uid = auth.currentUser.uid;
+      db.collection("patient")
+        .doc(uid)
+        .get()
+        .then(res => {
+          let userObj = {
+            age: age,
+            name: auth.currentUser.name,
+            email: auth.currentUser.email,
+            uid: auth.currentUser.uid
+
+            //TO_DO add canvas stuff
+          };
+          setUser(userObj);
+        });
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -157,7 +177,8 @@ const GlobalStates = props => {
         signout: signout,
         checkIfLoggedIn: checkIfLoggedIn,
         getUser: getUser,
-        createPatient: createPatient
+        createPatient: createPatient,
+        patientSubmit: patientSubmit
       }}
     >
       {props.children}
