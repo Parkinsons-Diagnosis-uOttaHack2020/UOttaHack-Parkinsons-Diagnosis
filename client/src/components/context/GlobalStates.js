@@ -110,11 +110,13 @@ const GlobalStates = props => {
   const createPatient = (name, email) => {
     return new Promise((resolve, reject) => {
       const uid = uuidv4();
+      const url = `http://localhost:3000/form/dr=${auth.currentUser.uid}_cl=${uid}_`;
       const patient = {
         name: name,
         email: email,
         uid: uid,
-        result: null
+        result: null,
+        url: url
       };
       db.collection("patients")
         .doc(uid)
@@ -165,6 +167,24 @@ const GlobalStates = props => {
     }
   };
 
+  const getValid = (drId, clId) => {
+    return new Promise((resolve, reject) => {
+      db.collection("doctors")
+        .doc(drId)
+        .get()
+        .then(res => {
+          let data = res.data();
+          let patients = data.patients;
+          for (let i = 0; i < patients.length; i++) {
+            if (patients[i].uid === clId) {
+              resolve(true);
+            }
+          }
+          resolve(false);
+        });
+    });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -178,7 +198,8 @@ const GlobalStates = props => {
         checkIfLoggedIn: checkIfLoggedIn,
         getUser: getUser,
         createPatient: createPatient,
-        patientSubmit: patientSubmit
+        patientSubmit: patientSubmit,
+        getValid: getValid
       }}
     >
       {props.children}

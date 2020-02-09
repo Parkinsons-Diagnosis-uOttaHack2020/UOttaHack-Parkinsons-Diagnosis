@@ -30,6 +30,7 @@ const Dashboard = props => {
               <div className="user">
                 <span>{user.name}</span>
                 <span>{user.email}</span>
+               
               </div>
               <button
                 onClick={() => {
@@ -72,6 +73,7 @@ const Dashboard = props => {
                                 ? ` ${patient.result}`
                                 : " not completed"}
                             </span>
+                            <a href={patient.url} target="_blank">{patient.url}</a>
                           </div>
                         );
                       })}
