@@ -33,9 +33,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
+const patch = (ids, result) => {
+  db.collection("doctors").doc(ids.drId).get().then(res => {
+    let data = res.data();
+    for (let i=0; i<data.patients.length; i++) {
+      if (data.patients[i].uid === ids.clId) {
+        data.patients[i].result = result.result;
+      }
+    }
+    db.collection("doctors").doc(ids.drId).update(data);
+  });
+}
+
 app.post("/send-image", async (req, res) => {
   const data = req.body;
-  console.log(data);
   const options = {
     method: "POST",
     body: JSON.stringify(data),
@@ -52,6 +63,8 @@ app.post("/send-image", async (req, res) => {
     }
     const parsedName = await name.json();
     fetched = parsedName;
+    console.log(fetched);
+    patch(data.ids, fetched);
   } catch (error) {
     console.log(error);
   }

@@ -89,4 +89,4 @@ def analyze(data, w, h):
 		set_session(sess)
 		res = model.predict(img.astype("float64")/255)
 
-	return (np.argmax(res[0]))
+	return (1 - np.argmax(res[0]))

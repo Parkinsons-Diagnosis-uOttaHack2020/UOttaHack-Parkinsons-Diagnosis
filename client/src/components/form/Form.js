@@ -6,6 +6,7 @@ import $ from "jquery";
 const Form = props => {
   const context = useContext(Context);
   const [valid, setValid] = useState(null);
+  const [ids, setIds] = useState(null);
 
   const parseUrl = async () => {
     const url = window.location.href;
@@ -33,6 +34,10 @@ const Form = props => {
         start();
       }
     });
+    setIds({
+      drId: drId,
+      clId: clId
+    })
   };
 
   let ctx;
@@ -158,7 +163,8 @@ const Form = props => {
                       context.sendImage(
                         getPixels(),
                         ctx.canvas.width,
-                        ctx.canvas.height
+                        ctx.canvas.height,
+                        ids
                       );
                       clearArea();
                     }}
