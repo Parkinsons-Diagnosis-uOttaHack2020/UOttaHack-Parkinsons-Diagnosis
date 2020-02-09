@@ -24,3 +24,60 @@ section {
 .btn:hover {
     opacity: 0.85;
 }
+
+.left-landing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 60%;
+    justify-content: center;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+    z-index: 10;
+    position: relative;
+}
+
+.header {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--black);
+    text-shadow: var(--mid_shadow);
+    margin-bottom: 12.5px;
+}
+
+.subheader {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--black);
+    text-shadow: var(--mid_shadow);
+    margin-bottom: 50px;
+}
+
+.header-btn {
+    box-shadow: var(--mid_shadow);
+    min-width: 250px;
+}
+
+.bg {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    object-fit: contain;
+    height: 125%;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.landing-section {
+    display: block;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.human {
+    display: inline-flex;
+
+}

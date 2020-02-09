@@ -17,12 +17,12 @@ const Nav = props => {
     <React.Fragment>
       <nav>
         <div className="logo">
-          <a href="/">PM'D</a>
+          <a href="/">Parkinson Diagnosis</a>
         </div>
         <div className="nav-links">
           {auth ? (
             <React.Fragment>
-              <a href="/user/dashboard">My account</a>
+              <a href="/user/dashboard"><i className="fas fa-user-md nav-icon"></i>My account</a>
             </React.Fragment>
           ) : (
             <React.Fragment>

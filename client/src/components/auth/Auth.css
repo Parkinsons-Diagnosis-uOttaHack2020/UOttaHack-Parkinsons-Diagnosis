@@ -1,0 +1,18 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: var(--mid_shadow);
+}
+
+.auth-header {
+    margin: 0 0 25px 0;
+    color: var(--black);
+    font-size: 24px;
+    font-weight: 500;
+    width: 100%;
+    padding-bottom: 12.5px;
+    text-align: center;
+    border-bottom: 1px solid #dfdfdf;
+}

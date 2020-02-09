@@ -7,6 +7,7 @@ const Form = props => {
   const context = useContext(Context);
   const [valid, setValid] = useState(null);
   const [ids, setIds] = useState(null);
+  const sent = context.sent;
 
   const parseUrl = async () => {
     const url = window.location.href;
@@ -33,11 +34,11 @@ const Form = props => {
       if (valid) {
         start();
       }
+      setIds({
+        drId: drId,
+        clId: clId
+      });
     });
-    setIds({
-      drId: drId,
-      clId: clId
-    })
   };
 
   let ctx;
@@ -136,55 +137,61 @@ const Form = props => {
 
   return (
     <section>
-      {valid ? (
+      {!sent ? (
         <React.Fragment>
-          <div className="form-container">
-            <div className="instructions">
-              <div className="top">
-                <h1>Instructions</h1>
-                <span className="inst-txt">
-                  In the blank canvas on the right, try your best to draw a
-                  spiral like the example pictured below. Click{" "}
-                  <b>SUBMIT</b> once your are done, or <b>CLEAR</b> to try
-                  again.
-                </span>
-              </div>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Archimedean_spiral.svg/1200px-Archimedean_spiral.svg.png" />
-            </div>
-            <div className="draw">
-              <div>
-                <div className="canvasWrapper">
-                  <canvas id="myCanvas" width="400" height="400"></canvas>
+          {valid ? (
+            <React.Fragment>
+              <div className="form-container">
+                <div className="instructions">
+                  <div className="top">
+                    <h1>Instructions</h1>
+                    <span className="inst-txt">
+                      In the blank canvas on the right, try your best to draw a
+                      spiral like the example pictured below. Click{" "}
+                      <b>SUBMIT</b> once your are done, or <b>CLEAR</b> to try
+                      again.
+                    </span>
+                  </div>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Archimedean_spiral.svg/1200px-Archimedean_spiral.svg.png" />
                 </div>
-                <div className="form-btns-container">
-                  <button
-                    className="btn form-btns"
-                    onClick={() => {
-                      context.sendImage(
-                        getPixels(),
-                        ctx.canvas.width,
-                        ctx.canvas.height,
-                        ids
-                      );
-                      clearArea();
-                    }}
-                  >
-                    Submit
-                  </button>
-                  <button
-                    className="btn form-btns"
-                    onClick={() => {
-                      clearArea();
-                    }}
-                  >
-                    Clear
-                  </button>
+                <div className="draw">
+                  <div>
+                    <div className="canvasWrapper">
+                      <canvas id="myCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div className="form-btns-container">
+                      <button
+                        className="btn form-btns"
+                        onClick={() => {
+                          context.sendImage(
+                            getPixels(),
+                            ctx.canvas.width,
+                            ctx.canvas.height,
+                            ids
+                          );
+                          clearArea();
+                        }}
+                      >
+                        Submit
+                      </button>
+                      <button
+                        className="btn form-btns"
+                        onClick={() => {
+                          clearArea();
+                        }}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </React.Fragment>
+          ) : null}
         </React.Fragment>
-      ) : null}
+      ) : (
+        <span>The result has been sent</span>
+      )}
     </section>
   );
 };

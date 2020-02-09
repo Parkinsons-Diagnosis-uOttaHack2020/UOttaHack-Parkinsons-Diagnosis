@@ -69,16 +69,34 @@ const Dashboard = props => {
                       {user.patients.map(patient => {
                         return (
                           <div key={patient.uid} className="patient">
-                            <span>Name: {patient.name}</span>
-                            <span>
-                              Test status:
-                              {patient.result !== null
-                                ? ` ${patient.result}`
-                                : " not completed"}
+                
+                            <span className="patient-info">
+                              <span>
+                                <i className="fas fa-user patient-icon"></i>
+                                {patient.name}
+                              </span>
+                              <span>
+                                <i className="fas fa-envelope patient-icon"></i>
+                                {patient.email}
+                              </span>
                             </span>
-                            <a href={patient.url} target="_blank">
-                              {patient.url}
-                            </a>
+                            <div>
+                              <span className="patient-info">
+                                <span>
+                                  <i className="fas fa-notes-medical patient-icon"></i>
+                                  {patient.result !== null
+                                    ? ` ${patient.result}`
+                                    : " Not completed"}
+                                </span>
+                              </span>
+                            </div>
+                            <div className="d-link">
+                              <button className="btn d-btn">
+                                <a href={patient.url} className="d-btn" target="_blank">
+                                  Link to test
+                                </a>
+                              </button>
+                            </div>
                           </div>
                         );
                       })}

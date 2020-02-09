@@ -13,9 +13,13 @@ const Landing = props => {
   }, []);
 
   return (
-    <section>
-      <span>Landing</span>
-      
+    <section className="landing-section">
+        <div className="left-landing">
+            <span className="header">Parkinson diagnosis</span>
+            <span className="subheader">A machine learning powerded and simple diagnosis for the Parkinson disease.</span>
+            <button className="btn header-btn">Get a license</button>
+        </div>
+        <img src="https://i.ya-webdesign.com/images/transparent-network-19.png" className="bg" alt="bg"/>
     </section>
   );
 };

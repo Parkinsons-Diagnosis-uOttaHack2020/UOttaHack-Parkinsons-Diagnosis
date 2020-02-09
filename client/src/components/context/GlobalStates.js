@@ -6,6 +6,7 @@ const uuidv4 = require("uuid/v4");
 const GlobalStates = props => {
   const [arr, setArr] = useState([]);
   const [user, setUser] = useState(null);
+  const [sent, setSent] = useState(false);
 
   // firebase config
   const firebaseConfig = {
@@ -24,6 +25,7 @@ const GlobalStates = props => {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   }
+  // good vibes
 
   // make auth and firestore references
   const auth = firebase.auth();
@@ -46,6 +48,7 @@ const GlobalStates = props => {
     };
     const response = await fetch("http://localhost:8000/send-image", options);
     let resObject = await response.json();
+    await setSent(true);
     console.log(resObject);
   };
 
@@ -205,7 +208,8 @@ const GlobalStates = props => {
         getUser: getUser,
         createPatient: createPatient,
         patientSubmit: patientSubmit,
-        getValid: getValid
+        getValid: getValid,
+        sent: sent
       }}
     >
       {props.children}

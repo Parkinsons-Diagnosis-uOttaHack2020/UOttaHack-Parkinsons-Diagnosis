@@ -27,7 +27,8 @@ body {
 :root {
   --black: #0d212c;
   --blue: #226669;
-  --orange: #cb5a4b;
+ /* --orange: #cb5a4b;*/
+  --orange: #45b641;
   --gray: rgb(221, 220, 220);
   --off_white: hsl(183, 51, 95);
   --long_shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),

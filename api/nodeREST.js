@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("cross-fetch");
 const cors = require("cors");
+const firebase = require("firebase");
 
 const firebase = require("firebase");
 
@@ -24,6 +25,27 @@ if (!firebase.apps.length) {
 }
 
   // make auth and firestore references
+const db = firebase.firestore();
+
+// firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyBvUDf4F3M0Th84gw1gCUamNBjSKhzgAA0",
+  authDomain: "pm-d-4bc87.firebaseapp.com",
+  databaseURL: "https://pm-d-4bc87.firebaseio.com",
+  projectId: "pm-d-4bc87",
+  storageBucket: "pm-d-4bc87.appspot.com",
+  messagingSenderId: "458449225121",
+  appId: "1:458449225121:web:df2f1835daf976bfa7f7e0",
+  measurementId: "G-503RQGPDL3"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+// make auth and firestore references
+const auth = firebase.auth();
 const db = firebase.firestore();
 
 app.use(cors());
@@ -57,14 +79,20 @@ app.post("/send-image", async (req, res) => {
 
   let fetched;
   try {
-    let name = await fetch("http://localhost:5000/postdata", options);
-    if (!name.ok) {
-      throw new Error(name.status);
+    let response = await fetch("http://localhost:5000/postdata", options);
+    if (!response.ok) {
+      throw new Error(response.status);
     }
+<<<<<<< HEAD
     const parsedName = await name.json();
     fetched = parsedName;
     console.log(fetched);
     patch(data.ids, fetched);
+=======
+    const parsedData = await response.json();
+    fetched = parsedData;
+    console.log(parsedData);
+>>>>>>> f
   } catch (error) {
     console.log(error);
   }
