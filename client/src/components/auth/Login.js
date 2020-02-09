@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Context";
+import "./Auth.css";
 
 const Login = props => {
   const context = useContext(Context);
-  const user = context.currentUser;
 
   const login = async () => {
     const form = document.getElementById("login-form");
@@ -39,13 +39,32 @@ const Login = props => {
 
   return (
     <section>
-      <span>Login page</span>
-      <form id="login-form">
-        <label htmlFor="login-email">Email</label>
-        <input type="email" name="login-email" id="login-email" required />
-        <label htmlFor="login-pass">Password</label>
-        <input type="password" name="login-pass" id="login-pass" required />
-        <button className="btn">Login</button>
+      <form className="auth-form" id="login-form">
+        <span className="auth-header">Doctor login</span>
+        <label htmlFor="login-email">
+          <i className="fas fa-user patient-icon"></i>Email
+        </label>
+        <input
+          type="email"
+          name="login-email"
+          id="login-email"
+          className="input"
+          placeholder="Email"
+          autoComplete="false"
+          required
+        />
+        <label htmlFor="login-pass">
+        <i className="fas fa-key patient-icon"></i>Password</label>
+        <input
+          type="password"
+          name="login-pass"
+          id="login-pass"
+          className="input"
+          placeholder="Password"
+          autoComplete="false"
+          required
+        />
+        <button className="btn form-btn">Login</button>
       </form>
     </section>
   );

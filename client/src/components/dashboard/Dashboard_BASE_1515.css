@@ -5,8 +5,7 @@
   align-items: center;
   padding: 50px;
   width: 20%;
-  height: calc(100% - 100px);
-  border-right: 1px solid #dfdfdf;
+  height: calc(100vh - 160px);
 }
 
 .user {
@@ -17,23 +16,38 @@
 
 .user-icon {
     font-size: 60px;
-    color: var(--blue);
+    color: #fff;
     position: relative;
     z-index: 20;
     height: 80px;
     width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 37.5px;
 }
 
+.user-icon::after {
+    content: "";
+    background-color: var(--blue);
+    border-radius: 50%;
+    z-index: -1;
+    height: 100px;
+    width: 100px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    transform: translate(-10px, -10px);
+}
 
 .user span {
   color: var(--black);
   font-size: 18px;
-  font-weight: 500;
-  margin: 5px 0;
+  font-weight: 400;
 }
 
 .d {
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
 }
 
 .dashboard {
@@ -41,12 +55,13 @@
   border-left: 1px solid #dfdfdf;
   border-right: 1px solid #dfdfdf;
   flex-direction: row;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
 }
 
 .d-right {
   width: calc(100% - 100px);
+  border-left: 1px solid #dfdfdf;
   padding: 50px;
 }
 
@@ -79,11 +94,8 @@
 }
 
 .patient-icon {
-    color: rgb(197, 197, 197);
+    color: var(--gray);
     font-size: 16px;
     padding-right: 8px;
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 25px;
 }
