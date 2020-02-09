@@ -2,7 +2,11 @@ section {
     margin-top: 60px;
     padding: 0 150px;
     width: calc(100% - 300px);
-    height: 100%;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn {
@@ -14,6 +18,7 @@ section {
     font-size: 16px;
     font-weight: 500;
     transition: opacity .25s ease;
+    border-radius: 5px;
 }
 
 .btn:hover {
