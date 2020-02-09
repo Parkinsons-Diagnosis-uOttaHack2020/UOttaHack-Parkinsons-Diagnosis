@@ -26,7 +26,7 @@ def quantify_image(image):
 def analyze(data, w, h):
 	global model
 	img = np.reshape(np.uint8(data), (w, h))
-	print(np.array2string(img))
+	# print(np.array2string(img))
 
 	# img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	img = cv2.resize(img, (200, 200))
