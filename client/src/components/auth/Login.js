@@ -3,6 +3,7 @@ import Context from "../context/Context";
 
 const Login = props => {
   const context = useContext(Context);
+  const user = context.currentUser;
 
   const login = async () => {
     const form = document.getElementById("login-form");
@@ -23,15 +24,19 @@ const Login = props => {
   };
 
   useEffect(() => {
+    
+
     const form = document.getElementById("login-form");
     form.addEventListener("submit", e => {
       e.preventDefault();
       login();
     });
 
-    if (context.user) {
-      props.history.push("/user/dashboard");
-    }
+    context.checkIfLoggedIn().then(auth => {
+      if (auth) {
+        props.history.push("/user/dashboard");
+      }
+    });
   }, []);
 
   return (
