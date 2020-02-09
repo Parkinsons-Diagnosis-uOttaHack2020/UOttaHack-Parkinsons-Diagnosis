@@ -69,13 +69,24 @@ const Dashboard = props => {
                       {user.patients.map(patient => {
                         return (
                           <div key={patient.uid} className="patient">
-                            <span>Name: {patient.name}</span>
-                            <span>
-                              Test status:
-                              {patient.result !== null
-                                ? ` ${patient.result}`
-                                : " not completed"}
+                            <span className="patient-info">
+                              <div>
+                                <i className="fas fa-user patient-icon"></i>Name{" "}
+                                <span>{patient.name}</span>
+                              </div>
                             </span>
+                            <div>
+                              <span className="patient-info">
+                                <i className="fas fa-diagnoses patient-icon"></i>
+                                Test status
+                                <span>
+                                  {" "}
+                                  {patient.result !== null
+                                    ? ` ${patient.result}`
+                                    : " not completed"}
+                                </span>
+                              </span>
+                            </div>
                             <a href={patient.url} target="_blank">
                               {patient.url}
                             </a>

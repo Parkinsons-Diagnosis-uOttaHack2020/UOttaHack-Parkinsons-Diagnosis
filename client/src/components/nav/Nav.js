@@ -18,6 +18,7 @@ const Nav = props => {
       <nav>
         <div className="logo">
           <a href="/">PM'D</a>
+
         </div>
         <div className="nav-links">
           {auth ? (
