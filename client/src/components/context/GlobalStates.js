@@ -28,14 +28,13 @@ const GlobalStates = props => {
   // make auth and firestore references
   const auth = firebase.auth();
   const db = firebase.firestore();
-  const [state, setState] = useState(null);
 
-  const sendImage = async (arr, width, height)  => {
+  const sendImage = async (arr, width, height) => {
     let obj = {
       img: arr,
       w: width,
       h: height
-    }
+    };
     // post request
     const options = {
       method: "POST",
@@ -46,7 +45,7 @@ const GlobalStates = props => {
     };
     const response = await fetch("http://localhost:8000/send-image", options);
     let resObject = await response.json();
-    setState(resObject.result);
+    console.log(resObject);
   };
 
   const register = (name, email, pass) => {
@@ -205,7 +204,7 @@ const GlobalStates = props => {
         getUser: getUser,
         createPatient: createPatient,
         patientSubmit: patientSubmit,
-        getValid: getValid,
+        getValid: getValid
       }}
     >
       {props.children}
