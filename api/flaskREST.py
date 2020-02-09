@@ -17,6 +17,7 @@ def index():
 @app.route('/postdata', methods = ['POST'])
 def postdata():
     data = request.get_json()
+    print(data)
     # print(len(data["img"]))
     result = analyze(data["img"], data["w"], data["h"])
     result_str = 'true' if result else 'false'

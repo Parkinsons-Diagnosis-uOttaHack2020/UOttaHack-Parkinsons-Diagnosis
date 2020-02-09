@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Context from "./context/Context";
 import TEMP from "./TEMP.json";
 import $ from "jquery";
+import "./test.css";
 
 const Test = props => {
   const context = useContext(Context);
@@ -34,12 +35,13 @@ const Test = props => {
   }
   
   function Draw(x, y, isDown) {
-      if (true) {
+      if (mousePressed) {
           ctx.beginPath();
           ctx.strokeStyle = "black";
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 4
           ctx.lineJoin = "round";
           ctx.moveTo(lastX, lastY);
+          if(!isDown) {ctx.moveTo(x, y);}
           ctx.lineTo(x, y);
           ctx.closePath();
           ctx.stroke();
@@ -60,10 +62,13 @@ const Test = props => {
     console.log(pix);
 
     var result = [];
+    var max = 0;
     for(let i = 0; i < pix.length; i += 4) {
       let element = pix[i+3];
+      if (pix[i+3] == 255) {max++;}
       result.push(element);
     }
+    console.log(max);
     return result;
     // // Loop over each pixel and invert the color.
     // for (var i = 0, n = pix.length; i < n; i += 4) {
@@ -86,7 +91,9 @@ const Test = props => {
 
   return (
     <React.Fragment>
-      <canvas id="myCanvas" width="250" height="250"></canvas>
+      <div className="canvasWrapper">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+      </div>
       <button
         onClick={() => {
           //context.sendImage(objToSend);
