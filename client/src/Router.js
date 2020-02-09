@@ -6,6 +6,7 @@ import Register from "./components/auth/Register";
 import Test from "./components/test";
 import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/nav/Nav";
+import Form from "./components/form/Form";
 
 const RouterComponent = () => {
   return (
@@ -15,6 +16,7 @@ const RouterComponent = () => {
           <Nav />
           <Switch>
             <Route path="/" exact render={props => <Landing {...props} />} />
+            <Route path="/form/" render={props => <Form {...props} />} />
             <Route path="/login" exact render={props => <Login {...props} />} />
             <Route
               path="/register"

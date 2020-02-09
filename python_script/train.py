@@ -92,7 +92,7 @@ for i in range(0, args["trials"]):
 	# train the model
 	print("[INFO] training model {} of {}...".format(i + 1,
 		args["trials"]))
-	model = RandomForestClassifier(n_estimators=500)
+	model = RandomForestClassifier(n_estimators=100)
 	model.fit(trainX, trainY)
 
 

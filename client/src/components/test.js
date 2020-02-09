@@ -2,19 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import Context from "./context/Context";
 import TEMP from "./TEMP.json";
 import $ from "jquery";
+import "./test.css";
 
 const Test = props => {
   const context = useContext(Context);
-  const arr = context.arr;
+  const [ctx, setCtx] = useState(null);
+
+  const state = context.state;
   let objToSend = TEMP;
 
   var mousePressed = false;
   var lastX, lastY;
-  var ctx;
   
   function start() {
-      ctx = document.getElementById('myCanvas').getContext("2d");
-  
       $('#myCanvas').mousedown(function (e) {
           mousePressed = true;
           Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
@@ -35,12 +35,13 @@ const Test = props => {
   }
   
   function Draw(x, y, isDown) {
-      if (true) {
+      if (mousePressed) {
           ctx.beginPath();
           ctx.strokeStyle = "black";
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 4
           ctx.lineJoin = "round";
           ctx.moveTo(lastX, lastY);
+          if(!isDown) {ctx.moveTo(x, y);}
           ctx.lineTo(x, y);
           ctx.closePath();
           ctx.stroke();
@@ -54,21 +55,57 @@ const Test = props => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
+  function getPixels() {
+    // Get the CanvasPixelArray from the given coordinates and dimensions.
+    var imgd = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    var pix = imgd.data;
+    console.log(pix);
+
+    var result = [];
+    var max = 0;
+    for(let i = 0; i < pix.length; i += 4) {
+      let element = pix[i+3];
+      if (pix[i+3] == 255) {max++;}
+      result.push(element);
+    }
+    console.log(max);
+    return result;
+    // // Loop over each pixel and invert the color.
+    // for (var i = 0, n = pix.length; i < n; i += 4) {
+    //     pix[i  ] = 255 - pix[i  ]; // red
+    //     pix[i+1] = 255 - pix[i+1]; // green
+    //     pix[i+2] = 255 - pix[i+2]; // blue
+    //     // i+3 is alpha (the fourth element)
+    // }
+
+  }
+
   useEffect(() => {
-    start();
-  }, []);
+    if (ctx) {
+      start();      
+    } else {
+      setCtx(document.getElementById('myCanvas').getContext("2d"));
+    }
+
+  }, [ctx]);
 
   return (
     <React.Fragment>
-      <canvas id="myCanvas"></canvas>
+      <div className="canvasWrapper">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+      </div>
       <button
         onClick={() => {
-          context.sendImage(objToSend);
+          //context.sendImage(objToSend);
+          
+          context.sendImage(getPixels(), ctx.canvas.width, ctx.canvas.height);
+          clearArea();
+
         }}
       >
         Envoyer
       </button>
-      <span>{arr.length != 0 ? arr.length : "0"}</span>
+      <span>{state !== null ? `${state}` : "Nothing"}</span>
     </React.Fragment>
   );
 };
