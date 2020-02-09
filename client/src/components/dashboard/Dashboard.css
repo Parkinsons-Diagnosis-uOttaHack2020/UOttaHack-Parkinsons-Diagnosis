@@ -87,3 +87,20 @@
     align-items: center;
     width: 25px;
 }
+
+.d-btn {
+    max-width: 250px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+    padding: 8px;
+}
+
+.d-link {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #dfdfdf;
+}

@@ -90,9 +90,13 @@ const Dashboard = props => {
                                 </span>
                               </span>
                             </div>
-                            <a href={patient.url} target="_blank">
-                              {patient.url}
-                            </a>
+                            <div className="d-link">
+                              <button className="btn d-btn">
+                                <a href={patient.url} className="d-btn" target="_blank">
+                                  Link to test
+                                </a>
+                              </button>
+                            </div>
                           </div>
                         );
                       })}
