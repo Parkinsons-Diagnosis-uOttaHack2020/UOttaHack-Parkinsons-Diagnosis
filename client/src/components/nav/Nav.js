@@ -17,7 +17,7 @@ const Nav = props => {
     <React.Fragment>
       <nav>
         <div className="logo">
-          <a href="/">ParksTest</a>
+          <a href="/">PM'D (Parkinson's ML Detector)</a>
         </div>
         <div className="nav-links">
           {auth ? (
