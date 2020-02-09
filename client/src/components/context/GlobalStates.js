@@ -95,7 +95,7 @@ const GlobalStates = props => {
   };
 
   const getUser = () => {
-    if (auth.currentUser.uid) {
+    if (auth.currentUser) {
       const uid = auth.currentUser.uid;
       db.collection("doctors")
         .doc(uid)

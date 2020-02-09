@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Context";
 import NewPatient from "../newPatient/NewPatient";
+import "./Dashboard.css";
 
 const Dashboard = props => {
   const context = useContext(Context);
@@ -23,50 +24,63 @@ const Dashboard = props => {
         <NewPatient closePopup={() => setNewPatient(false)} />
       ) : null}
       {user ? (
-        <section>
-          <div className="patients-container">
-            <div className="patients-top">
+        <section className="d">
+          <div className="dashboard">
+            <div className="d-left">
+              <div className="user">
+                <span>{user.name}</span>
+                <span>{user.email}</span>
+              </div>
               <button
-                className="btn"
                 onClick={() => {
-                  setNewPatient(true);
+                  context.signout();
+                  props.history.push("/");
                 }}
+                className="btn form-btn"
               >
-                Add patient
+                Sign out
               </button>
             </div>
-            <div className="patients-bottom">
-              {user.patients.length === 0 ? (
-                <React.Fragment>
-                  <span className="no-patients">
-                    You currently have no patients.
-                  </span>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  {user.patients.map(patient => {
-                    return (
-                      <div key={patient.uid} className="patient">
-                        <span>{patient.name}</span>
-                      </div>
-                    );
-                  })}
-                </React.Fragment>
-              )}
+            <div className="d-right">
+              <div className="patients-container">
+                <div className="patients-top">
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setNewPatient(true);
+                    }}
+                  >
+                    Add patient
+                  </button>
+                </div>
+                <div className="patients-bottom">
+                  {user.patients.length === 0 ? (
+                    <React.Fragment>
+                      <span className="no-patients">
+                        You currently have no patients.
+                      </span>
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      {user.patients.map(patient => {
+                        return (
+                          <div key={patient.uid} className="patient">
+                            <span>Patient: {patient.name}</span>
+                            <span>
+                              Test status:
+                              {patient.result !== null
+                                ? ` ${patient.result}`
+                                : " not completed"}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </React.Fragment>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-          <span>Dashboard page</span>
-          <span>{user.name}</span>
-          <span>{user.email}</span>
-          <button
-            onClick={() => {
-              context.signout();
-              props.history.push("/");
-            }}
-            className="btn"
-          >
-            Sign out
-          </button>
         </section>
       ) : null}
     </React.Fragment>
