@@ -1,8 +1,8 @@
+from analyze.analyze import analyze
 from flask import Flask, request
 import json
 import time
 
-from analyze.analyze import analyze
 
 from joblib import load
 
