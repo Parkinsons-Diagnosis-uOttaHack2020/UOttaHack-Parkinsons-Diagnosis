@@ -5,7 +5,7 @@ import $ from "jquery";
 
 const Form = props => {
   const context = useContext(Context);
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(null);
 
   const parseUrl = async () => {
     const url = window.location.href;
@@ -44,7 +44,6 @@ const Form = props => {
 
   function start() {
     ctx = document.getElementById("myCanvas").getContext("2d");
-
     $("#myCanvas").mousedown(function(e) {
       mousePressed = true;
       Draw(
@@ -79,6 +78,9 @@ const Form = props => {
       ctx.lineWidth = 1.5;
       ctx.lineJoin = "round";
       ctx.moveTo(lastX, lastY);
+      if (!isDown) {
+        ctx.moveTo(x, y);
+      }
       ctx.lineTo(x, y);
       ctx.closePath();
       ctx.stroke();
@@ -93,22 +95,66 @@ const Form = props => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
+  function getPixels() {
+    // Get the CanvasPixelArray from the given coordinates and dimensions.
+    var imgd = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    var pix = imgd.data;
+    console.log(pix);
+
+    var result = [];
+    var max = 0;
+    for (let i = 0; i < pix.length; i += 4) {
+      let element = pix[i + 3];
+      if (pix[i + 3] == 255) {
+        max++;
+      }
+      result.push(element);
+    }
+    console.log(max);
+    return result;
+    // // Loop over each pixel and invert the color.
+    // for (var i = 0, n = pix.length; i < n; i += 4) {
+    //     pix[i  ] = 255 - pix[i  ]; // red
+    //     pix[i+1] = 255 - pix[i+1]; // green
+    //     pix[i+2] = 255 - pix[i+2]; // blue
+    //     // i+3 is alpha (the fourth element)
+    // }
+  }
+
   useEffect(() => {
-    parseUrl();
-  }, []);
+    if (valid === null) {
+      parseUrl();
+    } else if (valid) {
+      start();
+    }
+  }, [valid]);
 
   return (
     <section>
       {valid ? (
         <React.Fragment>
           <div className="form-container">
-            <canvas id="myCanvas"></canvas>
+            <div className="canvasWrapper">
+              <canvas id="myCanvas" width="500" height="500"></canvas>
+            </div>
             <button
               onClick={() => {
-                context.sendImage(objToSend);
+                context.sendImage(
+                  getPixels(),
+                  ctx.canvas.width,
+                  ctx.canvas.height
+                );
+                clearArea();
               }}
             >
               Envoyer
+            </button>
+            <button
+              onClick={() => {
+                clearArea();
+              }}
+            >
+              Clear
             </button>
           </div>
         </React.Fragment>

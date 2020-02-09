@@ -4,7 +4,6 @@ import * as firebase from "firebase";
 const uuidv4 = require("uuid/v4");
 
 const GlobalStates = props => {
-<<<<<<< HEAD
   const [arr, setArr] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -29,9 +28,7 @@ const GlobalStates = props => {
   // make auth and firestore references
   const auth = firebase.auth();
   const db = firebase.firestore();
-=======
   const [state, setState] = useState(null);
->>>>>>> ec8ff9ce700775ce2066180a35125e9266032190
 
   const sendImage = async (arr, width, height)  => {
     let obj = {
@@ -197,7 +194,6 @@ const GlobalStates = props => {
   return (
     <Context.Provider
       value={{
-<<<<<<< HEAD
         arr: arr,
         sendImage: sendImage,
         register: register,
@@ -209,11 +205,7 @@ const GlobalStates = props => {
         getUser: getUser,
         createPatient: createPatient,
         patientSubmit: patientSubmit,
-        getValid: getValid
-=======
-        state: state,
-        sendImage: sendImage
->>>>>>> ec8ff9ce700775ce2066180a35125e9266032190
+        getValid: getValid,
       }}
     >
       {props.children}
