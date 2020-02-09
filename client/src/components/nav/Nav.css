@@ -8,6 +8,7 @@ nav {
     padding: 0 150px;
     position: fixed;
     top: 0;
+    z-index: 999;
   
   }
   
