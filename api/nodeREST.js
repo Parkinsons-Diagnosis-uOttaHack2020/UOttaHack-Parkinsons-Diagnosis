@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 
 app.post("/send-image", async (req, res) => {
   const data = req.body;
-  console.log(data);
+  // console.log(data);
   const options = {
     method: "POST",
     body: JSON.stringify(data),
@@ -35,7 +35,10 @@ app.post("/send-image", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  console.log(fetched);
+  console.log(req.body);
   res.json(fetched);
+
 });
 
 app.listen(port, () => console.log(`Api starting on port ${port}!`));
