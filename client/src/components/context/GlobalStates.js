@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Context from "./Context";
 import * as firebase from "firebase";
+const uuidv4 = require("uuid/v4");
 
 const GlobalStates = props => {
   const [arr, setArr] = useState([]);
@@ -75,7 +76,6 @@ const GlobalStates = props => {
             .then(res => {
               let data = res.data();
               setUser(data);
-              console.log(data);
               resolve(true);
             });
         });
@@ -107,6 +107,44 @@ const GlobalStates = props => {
     }
   };
 
+  const createPatient = (name, email) => {
+    return new Promise((resolve, reject) => {
+      const uid = uuidv4();
+      const patient = {
+        name: name,
+        email: email,
+        uid: uid,
+        result: null
+      };
+      db.collection("patients")
+        .doc(uid)
+        .set(patient)
+        .catch(err => {
+          reject(err);
+        });
+      db.collection("doctors")
+        .doc(auth.currentUser.uid)
+        .get()
+        .catch(err => {
+          reject(err);
+        })
+        .then(data => {
+          let user = data.data();
+          let patients = user.patients;
+          patients.push(patient);
+          let newUser = user;
+          newUser.patients = patients;
+          setUser(newUser);
+          db.collection("doctors")
+            .doc(auth.currentUser.uid)
+            .update({
+              patients: patients
+            });
+          resolve();
+        });
+    });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -118,7 +156,8 @@ const GlobalStates = props => {
         currentUser: auth.currentUser,
         signout: signout,
         checkIfLoggedIn: checkIfLoggedIn,
-        getUser: getUser
+        getUser: getUser,
+        createPatient: createPatient
       }}
     >
       {props.children}

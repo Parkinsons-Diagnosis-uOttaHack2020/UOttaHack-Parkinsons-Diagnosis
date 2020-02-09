@@ -24,8 +24,6 @@ const Login = props => {
   };
 
   useEffect(() => {
-    
-
     const form = document.getElementById("login-form");
     form.addEventListener("submit", e => {
       e.preventDefault();
@@ -40,16 +38,16 @@ const Login = props => {
   }, []);
 
   return (
-    <React.Fragment>
+    <section>
       <span>Login page</span>
       <form id="login-form">
         <label htmlFor="login-email">Email</label>
         <input type="email" name="login-email" id="login-email" required />
         <label htmlFor="login-pass">Password</label>
         <input type="password" name="login-pass" id="login-pass" required />
-        <button>Login</button>
+        <button className="btn">Login</button>
       </form>
-    </React.Fragment>
+    </section>
   );
 };
 

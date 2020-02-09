@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Context";
+import "./Landing.css";
 
 const Landing = props => {
   const context = useContext(Context);
@@ -12,19 +13,10 @@ const Landing = props => {
   }, []);
 
   return (
-    <React.Fragment>
-      <span>Landing page</span>
-      {auth ? (
-        <React.Fragment>
-          <a href="/user/dashboard">My account</a>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
-        </React.Fragment>
-      )}
-    </React.Fragment>
+    <section>
+      <span>Landing</span>
+      
+    </section>
   );
 };
 
