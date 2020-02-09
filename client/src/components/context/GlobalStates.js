@@ -24,6 +24,7 @@ const GlobalStates = props => {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   }
+  // good vibes
 
   // make auth and firestore references
   const auth = firebase.auth();
