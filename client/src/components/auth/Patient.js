@@ -16,6 +16,7 @@ const PatientForm = props => {
       context.register(name, email, pass);
     }
 */
+    context.patientSubmit(age);
     form.reset();
   };
 

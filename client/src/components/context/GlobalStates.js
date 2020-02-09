@@ -95,6 +95,7 @@ const GlobalStates = props => {
   };
 
   const getUser = () => {
+    
     if (auth.currentUser.uid) {
       const uid = auth.currentUser.uid;
       db.collection("doctors")
@@ -105,6 +106,27 @@ const GlobalStates = props => {
           setUser(data);
         });
     }
+  };
+
+  const patientSubmit =(age) => {
+    if (auth.currentUser.uid) {
+      const uid = auth.currentUser.uid;
+      db.collection("patient")
+        .doc(uid)
+        .get()
+        .then(res => {
+          let userObj = {
+          age: age
+          name: auth.currentUser.name,
+          email: auth.currentUser.email,
+          uid: auth.currentUser.uid,
+          
+          //TO_DO add canvas stuff 
+        };
+          setUser(userObj);
+        });
+    }
+    
   };
 
   return (
@@ -119,6 +141,7 @@ const GlobalStates = props => {
         signout: signout,
         checkIfLoggedIn: checkIfLoggedIn,
         getUser: getUser
+        patientSubmit: patientSubmit
       }}
     >
       {props.children}
