@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Context";
 import "./Nav.css";
+import Logo from "./logo.png";
 
 const Nav = props => {
   const context = useContext(Context);
@@ -17,6 +18,7 @@ const Nav = props => {
     <React.Fragment>
       <nav>
         <div className="logo">
+          <img src={Logo} className="logo-img" />
           <a href="/">Parkinson Diagnosis</a>
         </div>
         <div className="nav-links">

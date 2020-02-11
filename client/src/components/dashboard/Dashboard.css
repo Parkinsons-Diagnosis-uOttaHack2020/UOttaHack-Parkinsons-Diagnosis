@@ -17,11 +17,14 @@
 
 .user-icon {
     font-size: 60px;
-    color: var(--blue);
+    color: var(--black);
     position: relative;
     z-index: 20;
     height: 80px;
     width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
